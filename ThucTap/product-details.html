@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Sản Phẩm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="details.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="main.html">PhoneStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="main.html">Trang Chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Sản Phẩm</a></li>
+                    <li class="nav-item">
+                        <button class="btn btn-light position-relative" id="cartBtn" data-bs-toggle="modal" data-bs-target="#cartModal">
+                            🛒 Giỏ Hàng <span class="badge bg-danger" id="cartCount">0</span>
+                        </button>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container product-container">
+        <div class="row">
+            <div class="col-md-6">
+                <img id="product-image" src="https://via.placeholder.com/400" class="img-fluid rounded shadow" alt="Sản phẩm">
+            </div>
+            <div class="col-md-6">
+                <h2 id="product-name">Tên Sản Phẩm</h2>
+                <p id="product-price" class="text-danger fw-bold">Giá: 0đ</p>
+                
+
+                <!-- Chọn màu -->
+                <div class="mb-3">
+                    <label class="form-label">Chọn màu:</label>
+                    <div class="btn-group" role="group">
+                        <button class="btn color-btn" data-color="white">Trắng</button>
+                        <button class="btn color-btn" data-color="black">Đen</button>
+                        <button class="btn color-btn" data-color="blue">Xanh</button>
+                    </div>
+                </div>
+
+                <!-- Chọn dung lượng -->
+                <div class="mb-3">
+                    <label class="form-label">Chọn dung lượng:</label>
+                    <div class="btn-group" role="group">
+                        <button class="btn storage-btn" data-storage="256GB">256GB</button>
+                        <button class="btn storage-btn" data-storage="512GB">512GB</button>
+                        <button class="btn storage-btn" data-storage="1TB">1TB</button>
+                    </div>
+                </div>
+
+                <a href="#" class="btn btn-success">Thanh Toán Ngay</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const productData = {
+            'A': {name: 'iPhone 13', basePrice: 12000000, images: {white: './images/iphone13_white.jpg', black: './images/iphone13_black.jpg', blue: './images/iphone13_blue.jpg'}},
+            'B': {name: 'iPhone 16', basePrice: 20000000, images: {white: './images/iphone16_white.jpg', black: './images/iphone16_black.jpg', blue: './images/iphone16_blue.jpg'}},
+            'C': {name: 'Samsung S24 Ultra', basePrice: 22000000, images: {white: './images/s24_white.jpg', black: './images/s24_black.jpg', blue: './images/s24_blue.jpg'}}
+        };
+
+        const storagePrices = {
+            '256GB': 0,
+            '512GB': 2000000,
+            '1TB': 5000000
+        };
+
+        const productId = getQueryParam('product');
+        let selectedProduct = productData[productId] || productData['B']; 
+        let selectedColor = 'white';
+        let selectedStorage = '256GB';
+
+        function updateProduct() {
+            const finalPrice = selectedProduct.basePrice + storagePrices[selectedStorage];
+
+            document.getElementById('product-name').innerText = `${selectedProduct.name} ${selectedStorage}`;
+            document.getElementById('product-price').innerHTML = `Giá: ${finalPrice.toLocaleString()}đ`;
+            document.getElementById('product-image').src = selectedProduct.images[selectedColor];
+        }
+
+        document.querySelectorAll('.color-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            selectedColor = this.getAttribute('data-color');
+
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.backgroundColor = '#fff'; 
+                btn.style.color = '#000';
+            });
+
+            this.classList.add('active');
+            this.style.backgroundColor = selectedColor;
+            this.style.color = selectedColor === 'black' ? 'white' : 'black';
+
+            updateProduct();
+        });
+    });
+
+        document.querySelectorAll('.storage-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                selectedStorage = this.getAttribute('data-storage');
+
+                document.querySelectorAll('.storage-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                updateProduct();
+            });
+        });
+
+        updateProduct();
+    </script>
+
+</body>
+</html>
