@@ -1,0 +1,103 @@
+/* Tổng quan */
+body {
+    background-color: #eef2f5;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Container sản phẩm */
+.product-container {
+    margin-top: 50px;
+}
+
+/* Tiêu đề và giá */
+h2 {
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.text-danger {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* Ảnh sản phẩm */
+.img-fluid {
+    border-radius: 15px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+    max-width: 100%;
+    height: auto;
+}
+
+/* Nhóm nút */
+.btn-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+/* Nút màu sắc */
+.color-btn {
+    padding: 10px 25px;
+    font-size: 15px;
+    font-weight: 600;
+    border: 2px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.color-btn.active {
+    border-color: #000;
+    background-color: var(--btn-color);
+    color: #fff;
+}
+
+/* Các màu khác nhau */
+.color-btn[data-color="white"] { --btn-color: #f8f9fa; color: #000; }
+.color-btn[data-color="black"] { --btn-color: #000; }
+.color-btn[data-color="blue"] { --btn-color: #007bff; }
+
+/* Nút dung lượng */
+.storage-btn {
+    padding: 10px 25px;
+    font-size: 15px;
+    font-weight: 600;
+    border: 2px solid #007bff;
+    background-color: #fff;
+    color: #007bff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.storage-btn.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Hiệu ứng hover */
+.color-btn:hover,
+.storage-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Nút thanh toán */
+.btn-success {
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-success:hover {
+    background-color: #28a745;
+    transform: translateY(-2px);
+}
+
